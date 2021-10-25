@@ -1,0 +1,17 @@
+- name: loop module
+  hosts: test
+  become: yes
+  become_user: root
+  tasks:
+    - name: installing multiple packages
+      yum:
+        name: "{{item}}"
+        state: latest
+      loop:
+       - httpd
+       - git
+       - docker
+    - name: ensure apache is running
+      service:
+        name: httpd
+        state: started

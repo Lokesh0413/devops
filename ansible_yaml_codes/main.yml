@@ -1,0 +1,8 @@
+- name: installing the nginx
+  yum:
+   name: "{{package}}"
+   state: latest
+- name: ensure apache is running
+  service:
+    name: "{{package}}"
+    state: started

@@ -1,0 +1,32 @@
+- name: file module
+  hosts: test
+  gather_facts: no
+  tasks:
+    - name: creating the folder
+      file:
+        path: /tmp/chandu
+        state: directory
+    - name: creating the file
+      file:
+        path: /tmp/chandu/{{item}}
+        state: touch    
+      loop:
+        - sample.txt 
+        - lokesh.txt
+        - chandu.txt
+        - lokesh.log
+        - chandu.log
+    - name: finding the files
+      find:
+       paths: /tmp/chandu
+       patterns: '*.txt'
+      register: output
+    - name: printing the all files
+      debug:
+       msg: "{{output}}"
+    - name: deleting the files in remote location
+      file:
+        path: "{{item.path}}"
+        state: absent
+      loop:
+        "{{output.files}}"     

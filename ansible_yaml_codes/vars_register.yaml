@@ -1,0 +1,12 @@
+- name: registering the variable
+  hosts: prod
+  tasks:
+    - name: register the out put variable
+      shell: id -u
+      register: sample
+    - name: print the previous task output
+      debug:
+         msg: "{{sample}}"
+    - name: print the actual output
+      debug:
+         msg: "{{sample.stdout}}"

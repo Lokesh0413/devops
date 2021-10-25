@@ -1,0 +1,10 @@
+- name: fetch module
+  hosts: test
+  gather_facts: no
+  tasks:
+    - name: fetch the file from source to destination
+      fetch:
+        src: /tmp/sample.txt
+        dest: /tmp/sample-{{inventory_hostname}}
+        flat: yes
+        

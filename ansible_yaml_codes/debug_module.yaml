@@ -1,0 +1,7 @@
+- name: debug module
+  hosts: prod
+  gather_facts: no
+  tasks:
+    - name: print the message
+      debug:
+        msg: "hi good morning"

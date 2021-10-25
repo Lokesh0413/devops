@@ -1,0 +1,9 @@
+- name: creating vars
+  hosts: prod
+  vars_files:
+     - student.yaml
+  gather_facts: no
+  tasks:
+   - name: print my name
+     debug:
+       msg: "my name is {{student_name}} and my age is {{student_age}} and my place is {{student_place}}"

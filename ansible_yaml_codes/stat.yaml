@@ -1,0 +1,23 @@
+- name: file stat module
+  hosts: all
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: finding the file statstics
+      stat:
+        path: /tmp/chandu.sh
+      register: statstics
+    - name: printing the output
+      debug:
+        msg: "{{statstics}}"
+    - name: if the file exists
+      debug:
+        msg: "file already exists"
+      when: statstics.stat.exists == true
+    - name: if the file exists or not
+      debug:
+       msg: "file does not exists"
+      when: statstics.stat.exists == false   
+    - name: running the script
+      shell: sh /tmp/chandu.sh
+      when: statstics.stat.exists == true  

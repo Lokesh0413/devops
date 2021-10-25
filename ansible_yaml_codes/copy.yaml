@@ -1,0 +1,9 @@
+- name: copy module
+  hosts: prod
+  gather_facts: no
+  tasks:
+    - name: copy the file from source to destination
+      copy:
+        src: /home/lokeshchandu/lokesh.txt
+        dest: /tmp
+        remote_src: yes

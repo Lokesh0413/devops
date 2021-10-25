@@ -1,0 +1,15 @@
+- name: condition module
+  hosts: prod
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: installing the package
+      yum:
+        name: httpd
+        state: present
+      when: ansible_distribution == "centos" and ansible_distribution_version |int >=7
+      ignore_errors: yes
+    - name: start the services
+      service:
+        name: httpd
+        state: started  

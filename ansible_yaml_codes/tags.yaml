@@ -1,0 +1,43 @@
+- name: tags module
+  hosts: test
+  become: yes
+  gather_facts: no
+  tags:
+    - lokesh
+  tasks:
+    - name: installing docker packages
+      tags:
+        - never
+      yum:
+        name: docker
+        state: latest
+    - name: start the service of docker
+      tags:
+        - never
+      service:
+        name: docker
+        state: started    
+    - name: installing git packages
+      tags:
+        - test1
+      yum:
+        name: git
+        state: latest
+     
+- name: tags module
+  hosts: test
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: stop the docker packages
+      tags:
+       - stop
+      yum:
+       name: docker
+       state: absent
+    - name: stop the git packages
+      tags:
+       - stop1
+      yum:
+        name: git
+        state: absent

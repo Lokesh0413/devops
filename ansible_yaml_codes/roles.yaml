@@ -1,0 +1,7 @@
+- name: roles module
+  hosts: test
+  become: yes
+  gather_facts: no
+  tasks:
+    - include_role:
+        name: roles/lokesh

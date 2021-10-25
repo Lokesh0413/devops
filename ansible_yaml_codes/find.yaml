@@ -1,0 +1,20 @@
+- name: find module
+  hosts: prod
+  gather_facts: no
+  tasks:
+    - name: finding the files
+      find:
+        paths: /tmp
+        patterns: '*.txt'
+      register: output
+    - name: printing all the files
+      debug:
+        msg: "{{output}}"   
+    - name: copying this files to remote location
+      copy:
+        src: "{{item.path}}"
+        dest: /home/lokeshchand/
+        remote_src: yes
+      loop: 
+        "{{output.files}}"   
+        

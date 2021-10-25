@@ -1,0 +1,12 @@
+- name: creating vars
+  hosts: test
+  become: yes
+  become_user: root
+  gather_facts: no
+  vars:
+    - student_name: lokesh
+    - student_age: 29
+  tasks:
+   - name: print my name
+     debug:
+       msg: "my name is {{student_name}} and my age is {{student_age}}"

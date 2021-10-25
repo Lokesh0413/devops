@@ -1,0 +1,14 @@
+- name: loop module
+  hosts: test
+  become: yes
+  become_user: root
+  tasks:
+    - name: installing multiple packages
+      yum:
+        name: "{{item.name}}"
+        state: "{{item.state}}"
+      loop:
+       - {name: "httpd", state: "absent"}
+       - {name: "git", state: "latest"}
+       - {name: "docker", state: "absent"}
+    

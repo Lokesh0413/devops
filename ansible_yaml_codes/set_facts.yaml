@@ -1,0 +1,13 @@
+- name: registering the variable
+  hosts: prod
+  gather_facts: no
+  tasks:
+    - name: register the out put variable
+      shell: id -u
+      register: sample
+    - name: storing the value to another varables
+      set_fact:
+          MY_ID: "{{sample.stdout}}"
+    - name: print my user id value      
+      debug:
+         msg: "my user id value is {{MY_ID}}"
